@@ -142,6 +142,12 @@
         </div>
         <div>
           <label>
+            <input v-model="prependSectionIndexToFolderName" type="checkbox" />
+            <span class="ml-1">Prepend section index to each section folder</span>
+          </label>
+        </div>
+        <div>
+          <label>
             <input v-model="prependFileIndexToFileName" type="checkbox" />
             <span class="ml-1">
               Prepend file index to each file name (a number in the order that the files appear in
@@ -162,7 +168,12 @@
         class="w-5/6"
       ></progress-bar>
 
-      <button v-if="!downloadInProgress" class="mt-5 btn btn-primary" :disabled="disableDownload" @click="onDownload">
+      <button
+        v-if="!downloadInProgress"
+        class="mt-5 btn btn-primary"
+        :disabled="disableDownload"
+        @click="onDownload"
+      >
         Download
       </button>
     </div>
@@ -183,13 +194,7 @@ import SelectionTab from "./SelectionTab.vue"
 import defaultExtensionOptions from "@shared/defaultExtensionOptions"
 import { sendEvent } from "@shared/helpers"
 import { isFile, isFolder, isVideoServiceVideo } from "@shared/resourceHelpers"
-import {
-  Activity,
-  CourseCrawlMessage,
-  DownloadProgressMessage,
-  Message,
-  Resource,
-} from "@types"
+import { Activity, CourseCrawlMessage, DownloadProgressMessage, Message, Resource } from "@types"
 import { activeTab, options, onlyNewResources } from "../state"
 import { COMMANDS } from "@shared/constants"
 
@@ -215,6 +220,7 @@ const prependCourseNameToFileName = ref(options.value?.prependCourseNameToFileNa
 const prependCourseShortcutToFileName = ref(options.value?.prependCourseShortcutToFileName)
 const prependSectionToFileName = ref(options.value?.prependSectionToFileName)
 const prependSectionIndexToFileName = ref(options.value?.prependSectionIndexToFileName)
+const prependSectionIndexToFolderName = ref(options.value?.prependSectionIndexToFolderName)
 const prependFileIndexToFileName = ref(options.value?.prependFileIndexToFileName)
 
 // Resource data
@@ -327,6 +333,9 @@ const onDownload = () => {
         prependSectionIndexToFileName:
           prependSectionIndexToFileName.value ??
           defaultExtensionOptions.prependSectionIndexToFileName,
+        prependSectionIndexToFolderName:
+          prependSectionIndexToFolderName.value ??
+          defaultExtensionOptions.prependSectionIndexToFolderName,
         prependFileIndexToFileName:
           prependFileIndexToFileName.value ?? defaultExtensionOptions.prependFileIndexToFileName,
       },

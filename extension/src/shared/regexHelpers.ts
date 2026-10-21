@@ -15,7 +15,7 @@ type URLRegexType =
 
 const loginPageRegex = /\/login\/index.php/gi
 const dashboardPageRegex = /\/my/gi
-const coursePageRegex = /\/course\/view\.php\?id=[0-9]*/gi
+const coursePageRegex = /\/course\/(view|section)\.php\?id=[0-9]*/gi
 const courseResourcesPageRegex = /\/course\/resources\.php\?id=[0-9]*/gi
 const videoServicePageRegex = /\/mod\/videoservice\/view\.php/gi
 
@@ -23,7 +23,7 @@ const fileRegex = /\/mod\/resource\/view\.php\?id=[0-9]*/gi
 const folderRegex = /\/mod\/folder\/view\.php\?id=[0-9]*/gi
 const pluginFileRegex = /\/pluginfile\.php([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
 const urlRegex = /\/mod\/url\/view\.php\?id=[0-9]*/gi
-const activityRegex = /\/mod\/(?!resource|folder)[A-z]*\/view\.php\?id=[0-9]*/gi
+const activityRegex = /\/mod\/(?!resource|folder)[A-z]*\/.*\.php.*/gi
 
 const allRegexes: Record<URLRegexType, RegExp> = {
   login: loginPageRegex,

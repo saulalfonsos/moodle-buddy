@@ -45,6 +45,7 @@ export function sendPageData(page: SupportedPage) {
   const pageData: PagePayloadData = {
     page,
     content: document.querySelector("html")?.outerHTML || "",
+    url: location.href,
   }
   chrome.runtime.sendMessage({
     command: COMMANDS.PAGE_DATA,
@@ -85,5 +86,5 @@ export async function updateIconFromCourses(courses: Course[]) {
 }
 
 export function getCourseDownloadId(command: string, course: Course | DashboardCourseData) {
-  return `${command}_${course.link}`;
+  return `${command}_${course.link}`
 }
